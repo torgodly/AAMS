@@ -20,13 +20,13 @@ Route::get('/', function () {
 });
 
 
-
 //route middleware group auth and verified
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
+        $query = User::Teachers()->first()->group()->first()->users()->where('role', 'Student')->get();
+        dd($query->toArray());
         return view('dashboard');
     })->name('dashboard');
-
 
 
 });
@@ -38,4 +38,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'group_id',
     ];
 
     /**
@@ -41,4 +43,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //create relatcionship between groups and users teachers
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
+
+
+    //create scope for Teachers
+    public function scopeTeachers($query)
+    {
+        return $query->where('role', 'teacher');
+    }
+    //create scope for Students
+    public function scopeStudents($query)
+    {
+        return $query->where('role', 'student');
+    }
+
+    //create scope for Admins
+    public function scopeAdmins($query)
+    {
+        return $query->where('role', 'admin');
+    }
 }
