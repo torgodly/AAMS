@@ -17,9 +17,10 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'description' => $this->faker->text,
-             
+            'name' => ucfirst($this->faker->unique()->word) . ' ' . ucfirst($this->faker->unique()->word),
+            //fake short text
+            'description' => $this->faker->text(100),
+
         ];
     }
 }

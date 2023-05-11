@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Group;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,14 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Group::factory(1)->create();
-        \App\Models\User::factory()->create(['role' => 'teacher']);
-        \App\Models\User::factory(100)->create();
-//        \App\Models\User::factory(90)->create(['role' => 'teacher']);
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'admin@admin.com',
-            'role' => 'teacher',
+            'type' => 'admin',
         ]);
+        \App\Models\User::factory(10)->create(['type' => 'Teacher']);
+        \App\Models\User::factory(100)->create(['type' => 'Student']);
+        $teachers = Teacher::all();
+        foreach ($teachers as $teacher) {
+            Group::factory()->create(['teacher_id' => $teacher->id]);
+        }
+        //create students and attach every 10 students to a group
+//        $students = Student::all();
+//        $groups = Group::all();
+//        $i = 0;
+//        foreach ($students as $student) {
+//            $student->update(['group_id' => $groups[$i]->id]);
+//            if ($i == 9) {
+//                $i = 0;
+//            } else {
+//                $i++;
+//            }
+//        }
+
+
     }
 }

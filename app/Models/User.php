@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Parental\HasChildren;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasChildren;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,13 @@ class User extends Authenticatable
         'password',
         'role',
         'group_id',
+        'type'
+    ];
+
+    protected $childTypes = [
+        'admin' => Admin::class,
+        'Student' => Student::class,
+        'Teacher' => Teacher::class,
     ];
 
     /**
@@ -44,13 +52,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //create relatcionship between groups and users teachers
-
-    public function group()
-    {
-        return $this->belongsTo(Group::class);
-    }
-
 
 
     //create scope for Teachers
@@ -68,5 +69,11 @@ class User extends Authenticatable
     public function scopeAdmins($query)
     {
         return $query->where('role', 'admin');
+    }
+
+    //is_admin
+    public function isAdmin()
+    {
+        return $this->type === 'admin';
     }
 }
