@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\attendance;
 use App\Models\Group;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -21,11 +22,20 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
         \App\Models\User::factory(10)->create(['type' => 'Teacher']);
-        \App\Models\User::factory(100)->create(['type' => 'Student']);
+        \App\Models\User::factory(2)->create(['type' => 'Student']);
         $teachers = Teacher::all();
         foreach ($teachers as $teacher) {
             Group::factory()->create(['teacher_id' => $teacher->id]);
         }
+
+
+
+
+
+
+
+
+
         //create students and attach every 10 students to a group
 //        $students = Student::all();
 //        $groups = Group::all();

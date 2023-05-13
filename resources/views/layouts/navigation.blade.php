@@ -20,6 +20,11 @@
                             {{ __('Groups') }}
                         </x-nav-link>
                     @endif
+                    @if(Auth::user()->type == 'Teacher')
+                        <x-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
+                            {{ __('Attendance') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
@@ -87,6 +92,11 @@
             @if(Auth::user()->type == 'admin')
                 <x-responsive-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')">
                     {{ __('Groups') }}
+                </x-responsive-nav-link>
+            @endif
+            @if(Auth::user()->type == 'Teacher')
+                <x-responsive-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
+                    {{ __('Attendances') }}
                 </x-responsive-nav-link>
             @endif
         </div>

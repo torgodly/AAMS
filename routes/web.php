@@ -39,15 +39,17 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::post('/groups/{group}/add/students', [GroupController::class, 'add_students'])->name('group.students_add');
 });
 
-Route::middleware(['auth', 'verified', 'Teacher', 'admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 
-//    Route::resource('groups', \App\Http\Controllers\GroupController::class);
+    Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
+    //show
+    Route::get('attendances/{attendance:date}', [\App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
 });
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        dd(Auth::user()->group?->students);
+//        dd(Auth::user()->group?->students()->with('attendances')->get()->pluck('attendances')->flatten());
         return view('dashboard');
     })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

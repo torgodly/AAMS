@@ -15,4 +15,11 @@ class Student extends User
     {
         return $this->belongsTo(Group::class, 'group_id');
     }
+
+    //student has many attendances
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'student_id');
+    }
+
 }
