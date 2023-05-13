@@ -21,6 +21,12 @@ class Kernel extends ConsoleKernel
                     'is_present' => false,
                     'date' => now()->toDateString(),
                 ]);
+
+            }  foreach ($students as $student) {
+                $student->attendances()->create([
+                    'is_present' => false,
+                    'date' => now()->addDay()->toDateString(),
+                ]);
             }
         })->everyMinute();
     }

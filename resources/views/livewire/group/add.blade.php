@@ -1,4 +1,4 @@
-<div dir="rtl">
+<div >
     <div x-data="{ 'AssignGroupModel': false }" x-on:keydown.escape="AssignGroupModel=false">
         <div class="w-full bg-white rounded-lg border shadow-xl  mb-5">
             <div
@@ -45,54 +45,72 @@
                         <x-primary-button>{{ __('Assign to the Group') }}</x-primary-button>
                     </div>
                 </div>
-                <div class="px-4 sm:px-6 lg:px-8 rounded-xl ">
-                    <div class="mt-8 flex flex-col">
-                        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg ">
-                                    <table class="min-w-full divide-y divide-gray-300 ">
-                                        <thead class="bg-gray-50 rounded-xl">
-                                        <tr class="">
-                                            <th class="cursor-pointer py-3.5 pl-4 pr-3 text-center text-md font-semibold text-blue-400 sm:pl-6">{{__('select')}}</th>
 
-                                            <th wire:click="OrderBy('name')" scope="col"
-                                                class="cursor-pointer py-3.5 pl-4 pr-3 text-center text-md font-semibold text-blue-400 sm:pl-6">
-                                                {{__('Name')}}
-                                            </th>
-                                        </tr>
-                                        </thead>
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+                            <div class="flex flex-col">
+                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div
+                                        class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div
+                                            class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                            <table
+                                                class="min-w-full divide-y divide-gray-200">
+                                                <thead>
+                                                <tr>
 
-                                        @foreach ($students as $student)
-                                            <tbody class="divide-y divide-gray-200 bg-white">
-                                            <tr>
+                                                    <th wire:click="OrderBy('name')"
+                                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('Name')}}
+                                                    </th>
+                                                    <th
+                                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody
+                                                    class="bg-white divide-y divide-gray-200">
+                                                @foreach($students as $student)
+                                                    <tr>
+                                                        <td
+                                                            class="px-6 py-4 whitespace-no-wrap">
+                                                            <div
+                                                                class="flex items-center">
+                                                                <div>
+                                                                    <div
+                                                                        class="text-sm leading-5 font-medium text-gray-900">
+                                                                        {{ $student->name }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td
+                                                            class="px-6 py-4 whitespace-no-wrap">
 
-                                                <td
-                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-md font-medium text-gray-900 sm:pl-6 text-center">
-                                                    <input id="comments" wire:model="Selected"
-                                                           value="{{ $student->id }}"
-                                                           aria-describedby="comments-description" name="comments"
-                                                           type="checkbox"
-                                                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                </td>
-                                                <td
-                                                    class="whitespace-nowrap py-4 pl-4 pr-3 text-md font-medium text-gray-900 sm:pl-6 text-center">
-                                                    {{ $student->name }}</td>
 
-                                            </tr>
+                                                            <input type="checkbox" wire:model="Selected"
+                                                                   value="{{ $student->id }}">
+                                                        </td>
 
-                                            <!-- More people... -->
-                                            </tbody>
-                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                            <div
+                                                class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                                                {{ $students->links() }}
 
-                                    </table>
-                                </div>
-                                <div class="mt-5">
-                                    {{ $students->links() }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
 

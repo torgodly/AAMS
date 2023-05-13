@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
         \App\Models\User::factory(10)->create(['type' => 'Teacher']);
-        \App\Models\User::factory(2)->create(['type' => 'Student']);
-        $teachers = Teacher::all();
-        foreach ($teachers as $teacher) {
-            Group::factory()->create(['teacher_id' => $teacher->id]);
-        }
+        \App\Models\User::factory(200)->create(['type' => 'Student']);
+//        $teachers = Teacher::all();
+//        foreach ($teachers as $teacher) {
+//            Group::factory()->create(['teacher_id' => $teacher->id]);
+//        }
 
 
 
