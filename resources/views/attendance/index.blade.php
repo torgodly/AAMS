@@ -4,9 +4,18 @@
             {{ __('Attendance') }}
         </h2>
     </x-slot>
+
     <div class="py-12">
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+                <div class="p-2 flex justify-end items-center">
+                    <form action="{{route('attendances.store')}}" method="post">
+                        @csrf
+                        <x-primary-button type="Submit">{{__('New Day')}}</x-primary-button>
+                    </form>
+                </div>
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div

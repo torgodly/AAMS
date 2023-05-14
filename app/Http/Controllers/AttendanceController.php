@@ -6,6 +6,7 @@ use App\Models\attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
 use Database\Seeders\AttendanceSeeder;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -43,9 +44,40 @@ class AttendanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreattendanceRequest $request)
+    public function store()
     {
-        //
+        //get the last added attendance date
+        $lastAttendance = DB::table('attendances')
+            ->select('date')
+            ->orderByDesc('date')
+            ->first();
+        $students = Auth::user()->group?->students;
+
+        //if there is no attendance in the database, set the date to today
+        if ($lastAttendance == null) {
+            $date = date('Y-m-d');
+            foreach ($students as $student) {
+                $attendance = new attendance();
+                $attendance->student_id = $student->id;
+                $attendance->date = $date;
+                $attendance->is_present = false;
+                $attendance->save();
+            }
+
+        } else {
+            //if there is an attendance in the database, set the date to the next day
+            $date = date('Y-m-d', strtotime($lastAttendance->date . ' +1 day'));
+            foreach ($students as $student) {
+                $attendance = new attendance();
+                $attendance->student_id = $student->id;
+                $attendance->date = $date;
+                $attendance->is_present = false;
+                $attendance->save();
+            }
+        }
+
+        return back()->with('success', 'Attendance added successfully!');
+
     }
 
     /**
