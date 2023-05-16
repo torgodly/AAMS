@@ -29,7 +29,6 @@ class AttendanceController extends Controller
             ->paginate(10);
 
 
-
         return view('attendance.index', ['attendances' => $attendanceCounts]);
     }
 
@@ -65,8 +64,15 @@ class AttendanceController extends Controller
             }
 
         } else {
-            //if there is an attendance in the database, set the date to the next day
+            //if there is an attendance in the database, set the date to the next day "skip the weekend friday and saturday"
             $date = date('Y-m-d', strtotime($lastAttendance->date . ' +1 day'));
+            if (date('l', strtotime($date)) == 'Friday') {
+                $date = date('Y-m-d', strtotime($date . ' +2 day'));
+            }
+            if (date('l', strtotime($date)) == 'Saturday') {
+                $date = date('Y-m-d', strtotime($date . ' +1 day'));
+            }
+
             foreach ($students as $student) {
                 $attendance = new attendance();
                 $attendance->student_id = $student->id;

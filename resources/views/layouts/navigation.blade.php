@@ -24,6 +24,9 @@
                         <x-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
                             {{ __('Attendance') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.index')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
                     @endif
 
                 </div>
@@ -97,6 +100,10 @@
             @if(Auth::user()->type == 'Teacher')
                 <x-responsive-nav-link :href="route('attendances.index')" :active="request()->routeIs('attendances.index')">
                     {{ __('Attendances') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports.index')"
+                                       :active="request()->routeIs('reports.index')">
+                    {{ __('Reports') }}
                 </x-responsive-nav-link>
             @endif
         </div>

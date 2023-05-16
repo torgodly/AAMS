@@ -1,19 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Attendance') }}
+            Reportes
         </h2>
     </x-slot>
-
     <div class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 <div class="p-2 flex justify-end items-center">
-                    <form action="{{route('attendances.store')}}" method="post">
+                    <form action="{{route('reports.store')}}" method="post">
                         @csrf
-                        <x-primary-button type="Submit">{{__('New Day')}}</x-primary-button>
+                        <x-primary-button type="Submit">{{__('New Month')}}</x-primary-button>
                     </form>
                 </div>
                 <div class="flex flex-col">
@@ -28,11 +27,15 @@
                                     <tr>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Date
+                                            {{__('Start Date')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Attendance
+                                            {{__('End Date')}}
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                            {{__('Month')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -42,7 +45,7 @@
                                     </thead>
                                     <tbody
                                         class="bg-white divide-y divide-gray-200">
-                                    @foreach($attendances as $attendance)
+                                    @foreach($monthlyReports as $monthlyReport)
                                         <tr>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
@@ -51,7 +54,7 @@
                                                     <div>
                                                         <div
                                                             class="text-sm leading-5 font-medium text-gray-900">
-                                                            {{ $attendance->date }}-{{ \Carbon\Carbon::parse($attendance->date)->locale('ar')->dayName }}
+                                                            {{ $monthlyReport->start_date }}
 
                                                         </div>
                                                     </div>
@@ -61,12 +64,19 @@
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <div
                                                     class="text-sm leading-5 text-gray-900">
-                                                    {{ $attendance->attendance }}/{{ Auth::user()->group?->students->count()  }}
+                                                    {{$monthlyReport->end_date}}
                                                 </div>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
-                                                <x-primary-button onclick="location.href='{{route('attendance.show', $attendance->date)}}'">
+                                                <div
+                                                    class="text-sm leading-5 text-gray-900">
+                                                    {{Carbon\Carbon::parse($monthlyReport->start_date)->locale('ar')->monthName}}
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-no-wrap">
+                                                <x-primary-button onclick="location.href=">
                                                     {{__('Edit')}}
                                                 </x-primary-button>
                                             </td>
@@ -77,7 +87,7 @@
                                 </table>
                                 <div
                                     class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                                    {{ $attendances->links() }}
+                                    {{ $monthlyReports->links() }}
                                 </div>
                             </div>
                         </div>

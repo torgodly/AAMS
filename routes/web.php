@@ -44,6 +44,8 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
     Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
     //show
     Route::get('attendances/{attendance:date}', [\App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
+
+    Route::resource('reports', \App\Http\Controllers\MonthlyReportController::class);
 });
 
 

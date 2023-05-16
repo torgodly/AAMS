@@ -22,4 +22,10 @@ class Student extends User
         return $this->hasMany(Attendance::class, 'student_id');
     }
 
+    //has many monthly reports
+    public function monthlyReports()
+    {
+        return $this->hasMany(MonthlyReport::class, 'student_id');
+    }
+
 }

@@ -14,7 +14,6 @@ class Show extends Component
     public $date;
 
 
-
     public function render()
     {
         // Retrieve the authenticated user's group ID
@@ -26,6 +25,7 @@ class Show extends Component
             ->join('users', 'attendances.student_id', '=', 'users.id')
             ->where('users.group_id', $groupId)
             ->where('attendances.date', $this->date)
+            ->orderBy('name', 'asc')
             ->get();
         return view('livewire.attendance.show', ['students' => $Students]);
     }
@@ -33,7 +33,7 @@ class Show extends Component
     public function toggleAttendance($studentId, $date)
     {
         $student = Student::find($studentId);
-        if ($student->group_id = auth()->user()->group->id){
+        if ($student->group_id = auth()->user()->group->id) {
             $student->attendances()->updateOrCreate(
                 ['date' => $date],
                 ['is_present' => DB::raw('NOT is_present')]
