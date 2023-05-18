@@ -17,11 +17,11 @@ class MonthlyReportController extends Controller
     public function index()
     {
         $monthlyReports = DB::table('monthly_reports')
-            ->select('monthly_reports.start_date','monthly_reports.end_date' )
+            ->select('monthly_reports.start_date','monthly_reports.end_date',  )
             ->join('users', 'monthly_reports.student_id', '=', 'users.id')
             ->join('groups', 'users.group_id', '=', 'groups.id')
             ->where('groups.teacher_id', '=', Auth::id())
-            ->groupBy('start_date', 'end_date')
+            ->groupBy('start_date', 'end_date', )
             ->orderByDesc('start_date')
             ->paginate(10);
 //        dd($monthlyReports);
@@ -78,9 +78,9 @@ class MonthlyReportController extends Controller
      * Display the specified resource.
      */
     public
-    function show(MonthlyReport $monthlyReport)
+    function show(MonthlyReport $Report)
     {
-        //
+        dd($Report);
     }
 
     /**

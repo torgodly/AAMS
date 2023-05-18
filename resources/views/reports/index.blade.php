@@ -39,7 +39,7 @@
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
+                                            {{__('Scores')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -76,8 +76,8 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
-                                                <x-primary-button onclick="location.href=">
-                                                    {{__('Edit')}}
+                                                <x-primary-button onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                    {{__('Edit Scores')}}
                                                 </x-primary-button>
                                             </td>
 
