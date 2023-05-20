@@ -49,6 +49,10 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 
     Route::get('reports/{report:start_date}', [\App\Http\Controllers\MonthlyReportController::class, 'show'])->name('report.show');
 
+    Route::get('reports/{MonthlyReport}/{WeeklyReport}', [\App\Http\Controllers\WeeklyReportController::class, 'show'])->name('weeklyReport.show');
+
+    Route::resource('weekly_reports', \App\Http\Controllers\WeeklyReportController::class);
+
 });
 
 
