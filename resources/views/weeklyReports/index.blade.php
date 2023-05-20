@@ -9,12 +9,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                <div class="p-2 flex justify-end items-center">
-                    <form action="{{route('reports.store')}}" method="post">
-                        @csrf
-                        <x-primary-button type="Submit">{{__('New Month')}}</x-primary-button>
-                    </form>
-                </div>
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div
@@ -35,7 +29,7 @@
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            {{__('Month')}}
+                                            {{__('week')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -45,7 +39,7 @@
                                     </thead>
                                     <tbody
                                         class="bg-white divide-y divide-gray-200">
-                                    @foreach($monthlyReports as $monthlyReport)
+                                    @foreach($weeklyReports as $weeklyReport)
                                         <tr>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
@@ -54,7 +48,7 @@
                                                     <div>
                                                         <div
                                                             class="text-sm leading-5 font-medium text-gray-900">
-                                                            {{ $monthlyReport->start_date }}
+                                                            {{ $weeklyReport->start_date }}
 
                                                         </div>
                                                     </div>
@@ -64,31 +58,27 @@
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <div
                                                     class="text-sm leading-5 text-gray-900">
-                                                    {{$monthlyReport->end_date}}
+                                                    {{$weeklyReport->end_date}}
                                                 </div>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <div
                                                     class="text-sm leading-5 text-gray-900">
-                                                    {{Carbon\Carbon::parse($monthlyReport->start_date)->locale('ar')->monthName}}
+                                                    {{__(Carbon\Carbon::parse($weeklyReport->start_date)->locale('ar')->weekOfMonth)}}
                                                 </div>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
-                                                <x-primary-button onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                <x-primary-button onclick="location.href='{{route('weeklyReport.show', ['MonthlyReport' => $monthlyReport->start_date, 'WeeklyReport'=> $weeklyReport->end_date ])}}'">
                                                     {{__('Edit Scores')}}
                                                 </x-primary-button>
                                             </td>
-                                            {{-- TODO: add view scores --}}
+
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <div
-                                    class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                                    {{ $monthlyReports->links() }}
-                                </div>
                             </div>
                         </div>
                     </div>
