@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class MonthlyReport extends Model
+use Carbon\Carbon;
+    class MonthlyReport extends Model
 {
     use HasFactory;
 
@@ -22,5 +22,45 @@ class MonthlyReport extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function weeklyReports()
+    {
+        return $this->hasMany(WeeklyReport::class, 'monthly_report_id');
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($monthlyReport) {
+            $startDate = Carbon::parse($monthlyReport->start_date);
+            $endDate = Carbon::parse($monthlyReport->end_date);
+
+            // Calculate the start and end dates for each week in the month
+            $weeks = [];
+            $curWeekStart = $startDate;
+            while ($curWeekStart->lte($endDate)) {
+                $curWeekEnd = $curWeekStart->copy()->addDays(6)->setTime(23, 59, 59);
+                if ($curWeekEnd->gt($endDate)) {
+                    $curWeekEnd = $endDate;
+                }
+                $weeks[] = [
+                    'start_date' => $curWeekStart,
+                    'end_date' => $curWeekEnd,
+                ];
+                $curWeekStart = $curWeekEnd->copy()->addDay();
+            }
+
+            // Create a WeeklyReport for each week in the month
+            foreach ($weeks as $week) {
+                WeeklyReport::create([
+                    'start_date' => $week['start_date'],
+                    'end_date' => $week['end_date'],
+                    'monthly_report_id' => $monthlyReport->id,
+                ]);
+            }
+        });
     }
 }
