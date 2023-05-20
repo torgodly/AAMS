@@ -14,15 +14,15 @@
                                     <tr>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            name
+                                            {{__('name')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            date
+                                            {{__('date')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
+                                            {{__('Actions')}}
                                         </th>
                                     </tr>
                                     </thead>
