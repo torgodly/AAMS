@@ -80,7 +80,10 @@ class MonthlyReportController extends Controller
     public
     function show(MonthlyReport $Report)
     {
-        dd($Report);
+        $weeklyReports = $Report->weeklyReports;
+        $monthlyReport = $Report;
+        return view('weeklyReports.index', ['weeklyReports' => $weeklyReports,'monthlyReport' => $Report]);
+
     }
 
     /**
