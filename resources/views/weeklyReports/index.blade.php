@@ -30,7 +30,11 @@
                                             </th>
                                             <th
                                                 class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                {{ __('Scores') }}
+                                                {{ __('Edit Scores') }}
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                                {{ __('View Scores') }}
                                             </th>
                                         </tr>
                                     </thead>
