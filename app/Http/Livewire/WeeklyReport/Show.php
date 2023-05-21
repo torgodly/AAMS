@@ -5,6 +5,7 @@ namespace App\Http\Livewire\WeeklyReport;
 use Livewire\Component;
 use App\Models\WeeklyReport;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreGroupRequest;
 
 class Show extends Component
 {
@@ -16,15 +17,16 @@ class Show extends Component
     {
         $rules = [];
         foreach ($this->editedValues as $id => $values) {
-            $rules["editedValues.{$id}.exam"] = ['numeric', 'between:0,100'];
-            $rules["editedValues.{$id}.commitment"] = ['numeric', 'between:0,100'];
-            $rules["editedValues.{$id}.ethics"] = ['numeric', 'between:0,100'];
-            $rules["editedValues.{$id}.units"] = ['numeric', 'between:0,100'];
+            $rules["editedValues.{$id}.exam"] = ['numeric', 'between:0,20'];
+            $rules["editedValues.{$id}.commitment"] = ['numeric', 'between:0,5'];
+            $rules["editedValues.{$id}.ethics"] = ['numeric', 'between:0,5'];
+            $rules["editedValues.{$id}.units"] = ['numeric'];
         }
         return $rules;
     }
     public function render()
     {
+        
         $WeeklyReports = Auth::user()->group->students()
             ->whereHas('monthlyReports', function ($query) {
                 $query->where('start_date', '=', $this->start_date);

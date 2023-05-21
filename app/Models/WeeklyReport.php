@@ -26,4 +26,7 @@ class WeeklyReport extends Model
         $this->belongsTo(MonthlyReport::class, 'monthly_report_id');
     }
 
+
+    
+
 }

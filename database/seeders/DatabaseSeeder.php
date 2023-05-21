@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
         \App\Models\User::factory(10)->create(['type' => 'Teacher']);
-        \App\Models\User::factory(10)->create(['type' => 'Student', 'group_id' => 1]);
+        \App\Models\User::factory(2)->create(['type' => 'Student', 'group_id' => 1]);
         Group::factory()->create(['teacher_id' => 2]);
 //        $teachers = Teacher::all();
 //        foreach ($teachers as $teacher) {

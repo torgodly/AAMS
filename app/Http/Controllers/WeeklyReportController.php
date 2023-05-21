@@ -43,16 +43,31 @@ class WeeklyReportController extends Controller
     public function show($monthlyReport, $weeklyReport)
     {
 
-        return view('weeklyReports.show', ['start_date' => $monthlyReport, 'end_date' => $weeklyReport]);
+        $students = Auth::user()->group->students;
+
+        $totals = [];
+        
+        foreach ($students as $student) {
+            $scores = $student->getWeeklyScorese($monthlyReport, $weeklyReport);
+            $totals[$student->id] = $scores;
+        }
+
+        $scoreObjects = array_map(function ($scores) {
+            return (object) $scores;
+        }, $totals);
+
+        return view('weeklyReports.show', ['scores' => $scoreObjects]);
+
     }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(WeeklyReport $weeklyReport)
+    public function edit($monthlyReport, $weeklyReport)
     {
-        //
+        return view('weeklyReports.edit', ['start_date' => $monthlyReport, 'end_date' => $weeklyReport]);
+        
     }
 
     /**
