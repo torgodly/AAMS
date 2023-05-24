@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 ">
             <div>
-                <h1 class="text-2xl font-semibold text-gray-900">Groups</h1>
+                <h1 class="text-2xl font-semibold text-gray-900">{{__('Groups')}}</h1>
             </div>
 
             @livewire('group.create')
@@ -14,7 +14,7 @@
                                 <div class="text-xl font-semibold text-gray-900">{{ $group->name }}</div>
                                 <div class="text-sm font-medium text-gray-500">{{ $group->teacher?->name }}</div>
                             </div>
-                            <div class="text-sm font-medium text-gray-500">{{ $group->students?->count() }} students
+                            <div class="text-sm font-medium text-gray-500">{{ $group->students?->count() }} {{__('Students')}}
                             </div>
 
                         </div>

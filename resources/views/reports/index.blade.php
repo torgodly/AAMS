@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Reportes
+            {{__('Reports')}}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -39,7 +39,7 @@
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            {{__('Scores')}}
+                                            {{__('Weekly Reports')}}
                                         </th>
                                         <th
 
@@ -104,7 +104,7 @@
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <x-primary-button
                                                     onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
-                                                    {{__('view Scores')}}
+                                                    {{__('view Results')}}
                                                 </x-primary-button>
                                             </td>
                                         </tr>

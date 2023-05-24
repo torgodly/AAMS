@@ -34,7 +34,7 @@
                                             </th>
                                             <th
                                                 class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                                {{ __('View Scores') }}
+                                                {{ __('view Results') }}
                                             </th>
                                         </tr>
                                     </thead>
@@ -70,7 +70,7 @@
                                                 <td class="px-6 py-4 whitespace-no-wrap">
                                                     <x-primary-button
                                                         onclick="location.href='{{ route('weeklyReport.show', ['MonthlyReport' => $monthlyReport->start_date, 'WeeklyReport' => $weeklyReport->end_date]) }}'">
-                                                        {{ __('view Scores') }}
+                                                        {{ __('view Results') }}
                                                     </x-primary-button>
                                                 </td>
 

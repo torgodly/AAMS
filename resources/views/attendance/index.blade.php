@@ -28,15 +28,15 @@
                                     <tr>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Date
+                                            {{__('Date')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Attendance
+                                            {{__('Attendance')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
+                                            {{__('Actions')}}
                                         </th>
                                     </tr>
                                     </thead>
