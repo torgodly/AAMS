@@ -88,7 +88,7 @@
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <x-primary-button
-                                                    onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                    onclick="location.href='{{route('weeklyReport.index', $monthlyReport->start_date)}}'">
                                                     {{__('Weekly Reports')}}
                                                 </x-primary-button>
                                             </td>
@@ -98,6 +98,13 @@
                                                 <x-primary-button
                                                     onclick="location.href='{{route('report.edit', $monthlyReport->start_date)}}'">
                                                     {{__('Edit Scores')}}
+                                                </x-primary-button>
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-no-wrap">
+                                                <x-primary-button
+                                                    onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                    {{__('view Scores')}}
                                                 </x-primary-button>
                                             </td>
                                         </tr>

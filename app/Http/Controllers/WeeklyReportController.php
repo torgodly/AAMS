@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Result;
 use App\Models\WeeklyReport;
 use App\Models\MonthlyReport;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,11 @@ class WeeklyReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(MonthlyReport $Report)
     {
-        return view('weeklyReports.show');
+        $weeklyReports = $Report->weeklyReports;
+        $monthlyReport = $Report;
+        return view('weeklyReports.index', ['weeklyReports' => $weeklyReports, 'monthlyReport' => $Report]);
     }
 
     /**
@@ -43,20 +46,15 @@ class WeeklyReportController extends Controller
     public function show($monthlyReport, $weeklyReport)
     {
 
-        $students = Auth::user()->group->students;
 
-        $totals = [];
-        
-        foreach ($students as $student) {
-            $scores = $student->getWeeklyScorese($monthlyReport, $weeklyReport);
-            $totals[$student->id] = $scores;
-        }
 
-        $scoreObjects = array_map(function ($scores) {
-            return (object) $scores;
-        }, $totals);
 
-        return view('weeklyReports.show', ['scores' => $scoreObjects]);
+        $scores = Result::getWeeklyScores($monthlyReport, $weeklyReport);
+
+
+
+
+        return view('weeklyReports.show', ['scores' => $scores]);
 
     }
 
@@ -67,7 +65,7 @@ class WeeklyReportController extends Controller
     public function edit($monthlyReport, $weeklyReport)
     {
         return view('weeklyReports.edit', ['start_date' => $monthlyReport, 'end_date' => $weeklyReport]);
-        
+
     }
 
     /**

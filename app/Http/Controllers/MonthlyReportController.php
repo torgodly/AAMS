@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MonthlyReport;
 use App\Http\Requests\StoreMonthlyReportRequest;
 use App\Http\Requests\UpdateMonthlyReportRequest;
+use App\Models\Result;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -80,9 +81,8 @@ class MonthlyReportController extends Controller
     public
     function show(MonthlyReport $Report)
     {
-        $weeklyReports = $Report->weeklyReports;
-        $monthlyReport = $Report;
-        return view('weeklyReports.index', ['weeklyReports' => $weeklyReports,'monthlyReport' => $Report]);
+        $score =Result::getMonthlyScores($Report->start_date, $Report->end_date);
+        return view('reports.show', ['scores' => $score, 'monthlyReport' => $Report]);
 
     }
 

@@ -54,13 +54,15 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
     Route::get('reports/{MonthlyReport}/{WeeklyReport}', [\App\Http\Controllers\WeeklyReportController::class, 'edit'])->name('weeklyReport.edit');
     Route::get('reports/{MonthlyReport}/{WeeklyReport}/results', [\App\Http\Controllers\WeeklyReportController::class, 'show'])->name('weeklyReport.show');
 
-    Route::resource('weekly_reports', \App\Http\Controllers\WeeklyReportController::class);
+//    Route::resource('weekly_reports', \App\Http\Controllers\WeeklyReportController::class);
+//    index
+    Route::get('weekly_reports/{report:start_date}', [\App\Http\Controllers\WeeklyReportController::class, 'index'])->name('weeklyReport.index');
 });
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
 
+    Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
