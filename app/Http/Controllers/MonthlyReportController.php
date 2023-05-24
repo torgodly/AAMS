@@ -50,8 +50,8 @@ class MonthlyReportController extends Controller
 
         //if there is no monthly report in the database, set the date to today
         if ($lastMonthlyReport == null) {
-            $start_date = $start_date = Carbon::now()->startOfMonth()->format('Y-m-d');
-            $end_date = Carbon::now()->endOfMonth()->format('Y-m-d');
+            $start_date = Carbon::now()->format('Y-m-d');
+            $end_date = Carbon::parse($start_date)->addWeeks(4)->subDay()->format('Y-m-d');
             foreach ($students as $student) {
                 $monthlyReport = new MonthlyReport();
                 $monthlyReport->student_id = $student->id;
@@ -60,8 +60,8 @@ class MonthlyReportController extends Controller
                 $monthlyReport->save();
             }
         } else {
-            $start_date = Carbon::parse($lastMonthlyReport->start_date)->copy()->addMonthNoOverflow()->format('Y-m-d');
-            $end_date = Carbon::parse($lastMonthlyReport->end_date)->copy()->addMonthNoOverflow()->endOfMonth()->format('Y-m-d');
+            $start_date = Carbon::parse($lastMonthlyReport->end_date)->copy()->addDay()->format('Y-m-d');
+            $end_date = Carbon::parse($start_date)->copy()->addWeeks(4)->subDay()->format('Y-m-d');
             foreach ($students as $student) {
                 $monthlyReport = new MonthlyReport();
                 $monthlyReport->student_id = $student->id;
@@ -90,9 +90,10 @@ class MonthlyReportController extends Controller
      * Show the form for editing the specified resource.
      */
     public
-    function edit(MonthlyReport $monthlyReport)
+    function edit(MonthlyReport $Report)
     {
-        //
+//        dd($Report->start_date);
+        return view('reports.edit', ['start_date' => $Report->start_date]);
     }
 
     /**

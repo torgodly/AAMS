@@ -7,7 +7,7 @@ use App\Models\WeeklyReport;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreGroupRequest;
 
-class Show extends Component
+class Edit extends Component
 {
     public $start_date;
     public $end_date;
@@ -26,7 +26,7 @@ class Show extends Component
     }
     public function render()
     {
-        
+
         $WeeklyReports = Auth::user()->group->students()
             ->whereHas('monthlyReports', function ($query) {
                 $query->where('start_date', '=', $this->start_date);
@@ -48,7 +48,7 @@ class Show extends Component
 
 
         // dd($WeeklyReports);
-        return view('livewire.weekly-report.show', [
+        return view('livewire.weekly-report.edit', [
             'WeeklyReports' => $WeeklyReports,
         ]);
     }

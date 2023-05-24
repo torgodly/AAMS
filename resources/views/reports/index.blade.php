@@ -41,6 +41,17 @@
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                             {{__('Scores')}}
                                         </th>
+                                        <th
+
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                            {{__('Edit Scores')}}
+                                        </th>
+                                        <th
+
+
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                            {{__('view Results')}}
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody
@@ -76,11 +87,19 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
-                                                <x-primary-button onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                <x-primary-button
+                                                    onclick="location.href='{{route('report.show', $monthlyReport->start_date)}}'">
+                                                    {{__('Weekly Reports')}}
+                                                </x-primary-button>
+                                            </td>
+                                            <td
+
+                                                class="px-6 py-4 whitespace-no-wrap">
+                                                <x-primary-button
+                                                    onclick="location.href='{{route('report.edit', $monthlyReport->start_date)}}'">
                                                     {{__('Edit Scores')}}
                                                 </x-primary-button>
                                             </td>
-                                            {{-- TODO: add view scores --}}
                                         </tr>
                                     @endforeach
                                     </tbody>
