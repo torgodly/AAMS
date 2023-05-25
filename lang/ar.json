@@ -29,6 +29,7 @@
     "fiqh": "الفقه",
     "khata": "الخطأ",
     "name": "الاسم",
+    "Name": "الاسم",
     "password": "كلمة المرور",
     "percentage": "النسبة المئوية",
     "rank": "الترتيب",
@@ -37,5 +38,8 @@
     "view Results": "عرض النتائج",
     "week": "الاسبوع",
     "Reports": "التقارير",
-    "Dashboard": "لوحة التحكم"
+    "Dashboard": "لوحة التحكم",
+    "Teachers": "المعلمين",
+    "Teacher": "المعلم",
+    "Create Group": "انشاء مجموعة"
 }
