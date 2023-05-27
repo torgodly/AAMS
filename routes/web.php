@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -32,7 +33,10 @@ Route::get('/', function () {
 //});
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
 
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::resource('groups', GroupController::class);
     Route::get('/groups/{group}/add/students', [GroupController::class, 'add'])->name('group.students_add');
@@ -63,7 +67,7 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect(\route('login'));
     })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

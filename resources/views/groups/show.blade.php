@@ -17,6 +17,7 @@
                             <div>
                                 <div class="text-xl font-semibold text-gray-900">{{ $student->name }}</div>
                                 <div class="text-sm font-medium text-gray-500">{{ $student->email }}</div>
+                                <div class="text-sm font-medium text-gray-500">{{ $student->phone }}</div>
                             </div>
                             <div class="text-sm font-medium text-gray-500">{{ $student->group?->name }}</div>
 

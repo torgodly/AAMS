@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('user.create');
     }
 
     /**
@@ -33,19 +33,23 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone'=> $request->phone,
+            'type'=> $request->type,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+//        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return back()->with('success', __('User created.'));
     }
 }

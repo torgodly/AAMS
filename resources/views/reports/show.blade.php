@@ -91,12 +91,12 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap">
                                                 <div class="text-sm leading-5 text-gray-900">
-                                                    {{ $score->fiqh }}
+                                                    {{ $score->fiqh }}/100
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-no-wrap">
                                                 <div class="text-sm leading-5 text-gray-900">
-                                                    {{ $score->khata }}
+                                                    {{ $score->khata }}/100
                                                 </div>
                                             </td>
 
