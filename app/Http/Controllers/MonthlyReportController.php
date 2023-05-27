@@ -30,7 +30,7 @@ class MonthlyReportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Edit the form for creating a new resource.
      */
     public function create()
     {
@@ -87,7 +87,7 @@ class MonthlyReportController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit the form for editing the specified resource.
      */
     public
     function edit(MonthlyReport $Report)

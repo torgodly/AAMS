@@ -66,7 +66,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-no-wrap">
-                                                <x-primary-button onclick="location.href='{{route('attendance.show', $attendance->date)}}'">
+                                                <x-primary-button onclick="location.href='{{route('attendance.edit', $attendance->date)}}'">
                                                     {{__('Edit')}}
                                                 </x-primary-button>
                                             </td>

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
 
@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 
     Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
     //show
-    Route::get('attendances/{attendance:date}', [\App\Http\Controllers\AttendanceController::class, 'show'])->name('attendance.show');
+    Route::get('attendances/{attendance:date}', [\App\Http\Controllers\AttendanceController::class, 'edit'])->name('attendance.edit');
 
     Route::resource('reports', \App\Http\Controllers\MonthlyReportController::class);
     //edit
@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
-        return redirect(\route('login'));
+        return view('dashboard');
     })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

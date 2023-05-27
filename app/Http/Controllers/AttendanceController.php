@@ -33,7 +33,7 @@ class AttendanceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Edit the form for creating a new resource.
      */
     public function create()
     {
@@ -91,15 +91,15 @@ class AttendanceController extends Controller
      */
     public function show(attendance $attendance)
     {
-        return view('attendance.show', ['date' => $attendance->date]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit the form for editing the specified resource.
      */
     public function edit(attendance $attendance)
     {
-        //
+        return view('attendance.edit', ['date' => $attendance->date]);
+
     }
 
     /**

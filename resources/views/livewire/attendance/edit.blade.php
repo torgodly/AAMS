@@ -49,13 +49,12 @@
                                                     {{ $student->date }}
                                                 </div>
                                             </td>
-                                            <td
-                                                class="px-6 py-4 whitespace-no-wrap">
 
-
-                                                <input type="checkbox" wire:click="toggleAttendance({{$student->id}}, '{{$student->date}}')" @if($student->is_present) checked @endif">
+                                            <td class="px-6 py-4 whitespace-no-wrap">
+                                                <div class="text-sm leading-5 text-gray-900">
+                                                    <input type="checkbox" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-" wire:click="toggleAttendance({{$student->id}}, '{{$student->date}}')" @if($student->is_present) checked @endif" >
+                                                </div>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                     </tbody>

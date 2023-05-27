@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Show extends Component
+class Edit extends Component
 {
     public $date;
 
@@ -27,7 +27,7 @@ class Show extends Component
             ->where('attendances.date', $this->date)
             ->orderBy('name', 'asc')
             ->get();
-        return view('livewire.attendance.show', ['students' => $Students]);
+        return view('livewire.attendance.edit', ['students' => $Students]);
     }
 
     public function toggleAttendance($studentId, $date)
