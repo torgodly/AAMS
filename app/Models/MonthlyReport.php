@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-    class MonthlyReport extends Model
+
+class MonthlyReport extends Model
 {
     use HasFactory;
 
@@ -42,7 +43,14 @@ use Carbon\Carbon;
             $weeks = [];
             $curWeekStart = $startDate;
             while ($curWeekStart->lte($endDate)) {
-                $curWeekEnd = $curWeekStart->copy()->addDays(6)->setTime(23, 59, 59);
+                // Check if the current day is not Saturday
+                if (!$curWeekStart->isSaturday()) {
+                    // Skip this week
+                    $curWeekStart->next(Carbon::SATURDAY);
+                    continue;
+                }
+
+                $curWeekEnd = $curWeekStart->copy()->addDays(4)->setTime(23, 59, 59);
                 if ($curWeekEnd->gt($endDate)) {
                     $curWeekEnd = $endDate;
                 }
@@ -50,9 +58,8 @@ use Carbon\Carbon;
                     'start_date' => $curWeekStart,
                     'end_date' => $curWeekEnd,
                 ];
-                $curWeekStart = $curWeekEnd->copy()->addDay();
+                $curWeekStart = $curWeekEnd->copy()->addDay(2);
             }
-
             // Create a WeeklyReport for each week in the month
             foreach ($weeks as $week) {
                 WeeklyReport::create([

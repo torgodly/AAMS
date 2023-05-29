@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
+use Carbon\Carbon;
 use Database\Seeders\AttendanceSeeder;
 use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,14 +65,15 @@ class AttendanceController extends Controller
             }
 
         } else {
-            //if there is an attendance in the database, set the date to the next day "skip the weekend friday and saturday"
-            $date = date('Y-m-d', strtotime($lastAttendance->date . ' +1 day'));
-            if (date('l', strtotime($date)) == 'Friday') {
-                $date = date('Y-m-d', strtotime($date . ' +2 day'));
+            //if there is an attendance in the database, set the date to the next day "skip Thursdays Fridays"
+            $date = Carbon::parse($lastAttendance->date)->addDay()->format('Y-m-d');
+            if (Carbon::parse($date)->isThursday()) {
+                $date = Carbon::parse($date)->addDay()->format('Y-m-d');
             }
-            if (date('l', strtotime($date)) == 'Saturday') {
-                $date = date('Y-m-d', strtotime($date . ' +1 day'));
+            if (Carbon::parse($date)->isFriday()) {
+                $date = Carbon::parse($date)->addDay()->format('Y-m-d');
             }
+
 
             foreach ($students as $student) {
                 $attendance = new attendance();
