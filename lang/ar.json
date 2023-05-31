@@ -34,7 +34,7 @@
     "percentage": "النسبة المئوية",
     "rank": "الترتيب",
     "total": "المجموع",
-    "units": "لاثمان",
+    "units": "الاثمان",
     "view Results": "عرض النتائج",
     "week": "الاسبوع",
     "Reports": "التقارير",
@@ -69,5 +69,8 @@
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "بمجرد حذف حسابك ، سيتم حذف جميع الموارد والبيانات الخاصة به نهائيًا. قبل حذف حسابك ، يرجى تنزيل أي بيانات أو معلومات ترغب في الاحتفاظ بها.",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.": "بمجرد حذف حسابك ، سيتم حذف جميع الموارد والبيانات الخاصة به نهائيًا. يرجى إدخال كلمة المرور الخاصة بك لتأكيد أنك ترغب في حذف حسابك نهائيًا.",
     "Are you sure you want to delete your account?": "هل أنت متأكد أنك تريد حذف حسابك؟",
-    "Profile": "الملف الشخصي"
+    "Profile": "الملف الشخصي",
+    "Edit": "تعديل",
+    "Memorized": "الحفظ",
+    "Student created. and added to your group": "تم انشاء الطالب واضافته الى مجموعتك"
 }
