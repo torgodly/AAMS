@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class attendance extends Model
+class Attendance extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,7 @@ class attendance extends Model
         'student_id',
         'date',
         'is_present',
+        'memorization',
     ];
 
     //attendance belongs to student

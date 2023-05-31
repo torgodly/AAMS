@@ -35,7 +35,12 @@ class Result extends Model
 
             foreach ($student->monthlyReports as $monthlyReport) {
                 foreach ($monthlyReport->weeklyReports as $weeklyReport) {
-                    $attendanceScore = $student->attendances->whereBetween('date', [$weeklyReport->start_date, $weeklyReport->end_date])->count() * 4;
+
+                    $attendanceScore = $student->attendances
+                        ->whereBetween('date', [$weeklyReport->start_date, $weeklyReport->end_date])
+                        ->sum(function ($attendance) {
+                            return $attendance->memorization + 2;
+                        });
 
                     $scores->commitment += $weeklyReport->commitment;
                     $scores->ethics += $weeklyReport->ethics;
@@ -83,7 +88,12 @@ class Result extends Model
                 $scores->ahkam += $monthlyReport->ahkam;
                 foreach ($monthlyReport->weeklyReports as $weeklyReport) {
 
-                    $attendanceScore = $student->attendances->whereBetween('date', [$weeklyReport->start_date, $weeklyReport->end_date])->count() * 4;
+                    $attendanceScore = $student->attendances
+                        ->whereBetween('date', [$weeklyReport->start_date, $weeklyReport->end_date])
+                        ->sum(function ($attendance) {
+                            return $attendance->memorization + 2;
+                        });
+
                     $scores->commitment += $weeklyReport->commitment;
                     $scores->ethics += $weeklyReport->ethics;
                     $scores->exam += $weeklyReport->exam;
@@ -116,7 +126,6 @@ class Result extends Model
 
         return $scoresArr;
     }
-
 
 
 }

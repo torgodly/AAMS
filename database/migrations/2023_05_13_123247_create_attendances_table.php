@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id');
             $table->date('date');
             $table->boolean('is_present');
+            $table->integer('memorization')->default(0);
             $table->timestamps();
         });
     }

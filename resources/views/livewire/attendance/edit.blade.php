@@ -18,11 +18,15 @@
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            {{__('date')}}
+                                            {{__('Date')}}
                                         </th>
                                         <th
                                             class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            {{__('Actions')}}
+                                            {{__('Attendance')}}
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                            {{__('Memorized')}}
                                         </th>
                                     </tr>
                                     </thead>
@@ -52,7 +56,27 @@
 
                                             <td class="px-6 py-4 whitespace-no-wrap">
                                                 <div class="text-sm leading-5 text-gray-900">
-                                                    <input type="checkbox" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-" wire:click="toggleAttendance({{$student->id}}, '{{$student->date}}')" @if($student->is_present) checked @endif" >
+                                                    <input type="checkbox"
+                                                           class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-"
+                                                           wire:click="toggleAttendance({{$student->id}}, '{{$student->date}}')"
+                                                           @if($student->is_present) checked @endif" >
+                                                </div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-no-wrap">
+                                                <div class="text-sm leading-5 text-gray-900">
+                                                    @if ($editable == $student->attendance_id)
+                                                        <x-text-input
+                                                            wire:model.lazy="editedValues.{{ $student->attendance_id }}.memorization"
+                                                            type="number" min="0" max="100"
+                                                            wire:change="saveChanges"></x-text-input>
+
+                                                        <x-input-error class="mt-2" :messages="$errors->get(
+                                                                'editedValues.' . $student->attendance_id . '.memorization',
+                                                            )"/>
+                                                    @else
+                                                        <span
+                                                            wire:click="makeEditable({{ $student->attendance_id }})">{{ $student->memorization }}</span>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
@@ -61,7 +85,7 @@
                                 </table>
                                 <div
                                     class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-{{--                                    {{ $attendances->links() }}--}}
+                                    {{--                                    {{ $attendances->links() }}--}}
                                 </div>
                             </div>
                         </div>
