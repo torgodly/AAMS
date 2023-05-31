@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\attendance;
+use App\Models\Attendance;
 use App\Http\Requests\StoreattendanceRequest;
 use App\Http\Requests\UpdateattendanceRequest;
 use Carbon\Carbon;
@@ -57,10 +57,11 @@ class AttendanceController extends Controller
         if ($lastAttendance == null) {
             $date = date('Y-m-d');
             foreach ($students as $student) {
-                $attendance = new attendance();
+                $attendance = new Attendance();
                 $attendance->student_id = $student->id;
                 $attendance->date = $date;
                 $attendance->is_present = false;
+
                 $attendance->save();
             }
 
@@ -76,7 +77,7 @@ class AttendanceController extends Controller
 
 
             foreach ($students as $student) {
-                $attendance = new attendance();
+                $attendance = new Attendance();
                 $attendance->student_id = $student->id;
                 $attendance->date = $date;
                 $attendance->is_present = false;
@@ -91,14 +92,14 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(attendance $attendance)
+    public function show(Attendance $attendance)
     {
     }
 
     /**
      * Edit the form for editing the specified resource.
      */
-    public function edit(attendance $attendance)
+    public function edit(Attendance $attendance)
     {
         return view('attendance.edit', ['date' => $attendance->date]);
 
@@ -107,7 +108,7 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateattendanceRequest $request, attendance $attendance)
+    public function update(UpdateattendanceRequest $request, Attendance $attendance)
     {
         //
     }
@@ -115,7 +116,7 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(attendance $attendance)
+    public function destroy(Attendance $attendance)
     {
         //
     }
