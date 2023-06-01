@@ -53,6 +53,7 @@ class AttendanceController extends Controller
             ->first();
         $students = Auth::user()->group?->students;
 
+
         //if there is no attendance in the database, set the date to today
         if ($lastAttendance == null) {
             $date = Carbon::now()->format('Y-m-d');
