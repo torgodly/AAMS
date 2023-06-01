@@ -29,6 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (Auth::user()->type == 'Student'){
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['email' => __('Student Accounts are not ready.')]);
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
