@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('ethics')->default(0);
             $table->integer('units')->default(0);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

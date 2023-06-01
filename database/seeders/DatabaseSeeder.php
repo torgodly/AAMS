@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'الشيخ عبدالله',
             'email' => 'admin@admin.com',
             'type' => 'admin',
-            'password' => 'quranmausem@123'
+            'password' => bcrypt('quranmausem@123')
         ]);
 //
 //        \App\Models\User::factory(10)->create(['type' => 'Teacher']);
@@ -30,13 +30,6 @@ class DatabaseSeeder extends Seeder
 //        foreach ($teachers as $teacher) {
 //            Group::factory()->create(['teacher_id' => $teacher->id]);
 //        }
-
-
-
-
-
-
-
 
 
         //create students and attach every 10 students to a group

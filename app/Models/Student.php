@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Parental\HasParent;
 
 class Student extends User
 {
     use HasParent;
+    use SoftDeletes;
 
     //student belong to group
     public function group()

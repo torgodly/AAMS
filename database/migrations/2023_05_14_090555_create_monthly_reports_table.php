@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('ahkam')->default(0);
             $table->foreignId('student_id');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

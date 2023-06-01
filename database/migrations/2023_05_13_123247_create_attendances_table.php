@@ -18,6 +18,8 @@ return new class extends Migration
             $table->boolean('is_present');
             $table->integer('memorization')->default(0);
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
