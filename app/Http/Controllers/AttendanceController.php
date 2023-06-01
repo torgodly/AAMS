@@ -53,6 +53,9 @@ class AttendanceController extends Controller
             ->first();
         $students = Auth::user()->group?->students;
 
+        if ($students == null) {
+            return redirect()->route('attendances.index')->with('Message', __('There is no students in your group, please add students first!'));
+        }
 
         //if there is no attendance in the database, set the date to today
         if ($lastAttendance == null) {

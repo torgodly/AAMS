@@ -73,5 +73,8 @@
     "Edit": "تعديل",
     "Memorized": "الحفظ",
     "Student created. and added to your group": "تم انشاء الطالب واضافته الى مجموعتك",
-    "Log Out": "تسجيل الخروج"
+    "Log Out": "تسجيل الخروج",
+    "There is no students in your group, please add students first!": "لا يوجد طلاب في مجموعتك، يرجى اضافة طلاب اولا!",
+    "Message": "رسالة"
+
 }
