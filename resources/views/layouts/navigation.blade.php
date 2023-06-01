@@ -19,9 +19,7 @@
                         <x-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')">
                             {{ __('Groups') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                            {{ __('Register new Account') }}
-                        </x-nav-link>
+
                     @endif
                     @if(Auth::user()->type == 'Teacher')
                         <x-nav-link :href="route('attendances.index')"
@@ -33,7 +31,11 @@
                         </x-nav-link>
 
                     @endif
-
+                    @if(Auth::user()->type == 'admin' || Auth::user()->type == 'Teacher')
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Register new Account') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -110,6 +112,11 @@
                 <x-responsive-nav-link :href="route('reports.index')"
                                        :active="request()->routeIs('reports.index')">
                     {{ __('Reports') }}
+                </x-responsive-nav-link>
+            @endif
+            @if(Auth::user()->type == 'admin' || Auth::user()->type == 'Teacher')
+                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('Register new Account') }}
                 </x-responsive-nav-link>
             @endif
         </div>

@@ -55,7 +55,14 @@ class AttendanceController extends Controller
 
         //if there is no attendance in the database, set the date to today
         if ($lastAttendance == null) {
-            $date = date('Y-m-d');
+            $date = Carbon::now()->format('Y-m-d');
+            if (Carbon::parse($date)->isThursday()) {
+                $date = Carbon::parse($date)->addDay()->format('Y-m-d');
+            }
+            if (Carbon::parse($date)->isFriday()) {
+                $date = Carbon::parse($date)->addDay()->format('Y-m-d');
+            }
+//            $date = date('Y-m-d');
             foreach ($students as $student) {
                 $attendance = new Attendance();
                 $attendance->student_id = $student->id;

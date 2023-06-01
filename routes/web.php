@@ -33,10 +33,6 @@ Route::get('/', function () {
 //});
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-
-    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::resource('groups', GroupController::class);
     Route::get('/groups/{group}/add/students', [GroupController::class, 'add'])->name('group.students_add');
@@ -72,6 +68,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
 });
 
 require __DIR__ . '/auth.php';

@@ -14,8 +14,12 @@ class Result extends Model
     public static function getWeeklyScores($startDate, $endDate)
     {
         $students = Auth::user()->group->students()
+            ->whereHas('monthlyReports', function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate]);
+            })
             ->with(['attendances' => function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('date', [$startDate, $endDate])->where('is_present', true);
+                $query->whereBetween('date', [$startDate, $endDate])
+                    ->where('is_present', true);
             }, 'monthlyReports.weeklyReports' => function ($query) use ($endDate) {
                 $query->where('end_date', $endDate);
             }])
@@ -59,7 +63,9 @@ class Result extends Model
 
     public static function getMonthlyScores($startDate, $endDate)
     {
-        $students = Auth::user()->group->students()
+        $students = Auth::user()->group->students()->whereHas('monthlyReports', function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('start_date', [$startDate, $endDate]);
+        })
             ->with(['attendances' => function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('date', [$startDate, $endDate])->where('is_present', true);
             }, 'monthlyReports.weeklyReports'])

@@ -30,9 +30,37 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+
+        if ($request->user()->type == 'Teacher') {
+
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+                'phone' => ['required', 'string', 'max:255'],
+//                'type' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'type' => 'Student',
+                'group_id' => $request->user()->group->id,
+                'password' => Hash::make($request->password),
+            ]);
+
+            event(new Registered($user));
+
+//        Auth::login($user);
+
+            return back()->with('success', __('Student created.'));
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'phone' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -41,8 +69,8 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone'=> $request->phone,
-            'type'=> $request->type,
+            'phone' => $request->phone,
+            'type' => $request->type,
             'password' => Hash::make($request->password),
         ]);
 

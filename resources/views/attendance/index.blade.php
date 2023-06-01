@@ -61,7 +61,7 @@
                                                 class="px-6 py-4 whitespace-no-wrap">
                                                 <div
                                                     class="text-sm leading-5 text-gray-900">
-                                                    {{ $attendance->attendance }}/{{ Auth::user()->group?->students->count()  }}
+                                                    {{ $attendance->attendance }}/{{ Auth::user()->group?->students->wherebetween('created_at', ['2022-01-01', \Carbon\Carbon::parse($attendance->date)->addDay()->format('Y-m-d')])->count()  }}
                                                 </div>
                                             </td>
                                             <td

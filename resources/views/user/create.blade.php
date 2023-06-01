@@ -44,13 +44,17 @@
                                               :value="old('phone')" required autocomplete="phone"/>
                                 <x-input-error :messages="$errors->get('phone')" class="mt-2"/>
                             </div>
-                            <div class="mt-4">
-                                <x-input-label for="type" :value="__('type')"/>
-                                <x-select-input label="type" name="type"
-                                                class="block mt-1 w-full"
-                                                :options="['admin' => 'admin', 'Student' => 'Student', 'Teacher' => 'Teacher']"/>
-                                <x-input-error :messages="$errors->get('type')" class="mt-2"/>
-                            </div>
+
+                            @if(Auth::user()->type == 'admin')
+                                <div class="mt-4">
+                                    <x-input-label for="type" :value="__('type')"/>
+                                    <x-select-input label="type" name="type"
+                                                    class="block mt-1 w-full"
+                                                    :options="['admin' => 'admin', 'Student' => 'Student', 'Teacher' => 'Teacher']"/>
+                                    <x-input-error :messages="$errors->get('type')" class="mt-2"/>
+                                </div>
+                            @endif
+
 
                             <!-- Password -->
                             <div class="mt-4">
