@@ -54,7 +54,7 @@ class MonthlyReportController extends Controller
         }
         //if there is no monthly report in the database, set the date to today
         if ($lastMonthlyReport == null) {
-            $start_date = Carbon::now()->format('Y-m-d');
+            $start_date = Carbon::create(2023,06,03)->format('Y-m-d');
             $end_date = Carbon::parse($start_date)->addWeeks(4)->subDay()->format('Y-m-d');
             foreach ($students as $student) {
                 $monthlyReport = new MonthlyReport();
