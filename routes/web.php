@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::resource('groups', GroupController::class);
     Route::get('/groups/{group}/add/students', [GroupController::class, 'add'])->name('group.students_add');
     Route::post('/groups/{group}/add/students', [GroupController::class, 'add_students'])->name('group.students_add');
+    Route::post('students/import', [StudentController::class, 'store'])->name('students.import');
+
 });
 
 Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
@@ -57,6 +59,8 @@ Route::middleware(['auth', 'verified', 'Teacher',])->group(function () {
 //    Route::resource('weekly_reports', \App\Http\Controllers\WeeklyReportController::class);
 //    index
     Route::get('weekly_reports/{report:start_date}', [\App\Http\Controllers\WeeklyReportController::class, 'index'])->name('weeklyReport.index');
+
+    //import
 });
 
 

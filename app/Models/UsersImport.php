@@ -17,7 +17,7 @@ class UsersImport extends Model
 
 
         try {
-            $spreadsheet = IOFactory::load('public/files/students.xlsx');
+            $spreadsheet = IOFactory::load(storage_path('app/public/students.xlsx'));
 
             $worksheet = $spreadsheet->getActiveSheet();
             $data = $worksheet->toArray();
@@ -31,6 +31,7 @@ class UsersImport extends Model
                     'type' => $row[4],
                 ]);
             }
+
         } catch (ReaderException|SpreadsheetException $e) {
             var_dump($e->getMessage());
         }

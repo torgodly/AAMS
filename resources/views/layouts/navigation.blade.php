@@ -73,6 +73,14 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        <form method="POST" action="{{ route('students.import') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('students.import')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('import') }}
+                            </x-dropdown-link>
+                        </form>
                     </x-slot>
                 </x-dropdown>
             </div>
