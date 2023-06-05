@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::resource('groups', GroupController::class);
     Route::get('/groups/{group}/add/students', [GroupController::class, 'add'])->name('group.students_add');
     Route::post('/groups/{group}/add/students', [GroupController::class, 'add_students'])->name('group.students_add');
-    Route::post('students/import', [StudentController::class, 'store'])->name('students.import');
+//    Route::post('students/import', [StudentController::class, 'store'])->name('students.import');
 
 });
 
