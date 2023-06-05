@@ -17,7 +17,7 @@ class UsersImport extends Model
 
 
         try {
-            $spreadsheet = IOFactory::load(storage_path('app/public/students.xlsx'));
+            $spreadsheet = IOFactory::load(public_path('files/students.xlsx'));
 
             $worksheet = $spreadsheet->getActiveSheet();
             $data = $worksheet->toArray();
@@ -26,7 +26,7 @@ class UsersImport extends Model
                 User::create([
                     'name' => $row[0],
                     'email' => $row[1],
-                    'password' => $row[2],
+                    'password' => bcrypt($row[2]),
                     'phone' => $row[3],
                     'type' => $row[4],
                 ]);
